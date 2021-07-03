@@ -20,24 +20,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,56 +40,64 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Center(
         child: AspectRatio(
           aspectRatio: 1.0,
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: colors,
-                    stops: stops,
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter
-                  )
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: colors,
+                      stops: stops,
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter
+                    )
+                  ),
                 ),
               ),
-              LineChart(
-                LineChartData(
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: [
-                        FlSpot(1, 12),
-                        FlSpot(2, 23),
-                        FlSpot(3, 8),
-                        FlSpot(4, 9),
-                        FlSpot(5, 14),
-                        FlSpot(6, 2),
-                      ],
-                      colors: [
-                        Colors.green,
-                        Colors.yellow,
-                        Colors.red
-                      ],
-                      colorStops: stops,
-                      gradientFrom: const Offset(0, 0),
-                      gradientTo: const Offset(0, 1)
-                    )
-                  ]
-                )
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: LineChart(
+                  LineChartData(
+                    gridData: FlGridData(
+                      show: false,
+                      drawHorizontalLine: false
+                    ),
+                    lineBarsData: [
+                      LineChartBarData(
+                        dotData: FlDotData(
+                          show: false
+                        ),
+                        spots: [
+                          FlSpot(1, 12),
+                          FlSpot(2, 23),
+                          FlSpot(3, 8),
+                          FlSpot(4, 9),
+                          FlSpot(5, 14),
+                          FlSpot(6, 2),
+                        ],
+                        colors: [
+                          Colors.green,
+                          Colors.yellow,
+                          Colors.red
+                        ],
+                        colorStops: stops,
+                        gradientFrom: const Offset(0, 0),
+                        gradientTo: const Offset(0, 1)
+                      )
+                    ]
+                  )
+                ),
               )
             ],
           )
         )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      )
     );
   }
 }
