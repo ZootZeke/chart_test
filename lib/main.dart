@@ -10,11 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chart Test',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Chart Testing'),
     );
   }
 }
@@ -32,8 +32,8 @@ class MyHomePage extends StatelessWidget {
       Colors.red
     ];
     final List<double> stops = [
-      0.3,
-      0.6,
+      0.0,
+      0.5,
       1.0
     ];
 
@@ -46,7 +46,7 @@ class MyHomePage extends StatelessWidget {
           aspectRatio: 1.0,
           child: LayoutBuilder(
             builder: (context, constraints) {
-              final double alignRatio = (41 / constraints.maxWidth) * 2 - 1;
+              final double alignRatio = (40 / constraints.maxWidth) * 2 - 1;
 
               return Stack(
                 children: [
@@ -72,6 +72,11 @@ class MyHomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(10.0),
                     child: LineChart(
                       LineChartData(
+                        borderData: FlBorderData(
+                          border: Border(
+                            bottom: BorderSide(color: Colors.black)
+                          )
+                        ),
                         titlesData: FlTitlesData(
                           leftTitles: SideTitles(
                             showTitles: true,
@@ -94,6 +99,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                         lineBarsData: [
                           LineChartBarData(
+                            barWidth: 4.0,
                             isCurved: true,
                             dotData: FlDotData(
                               show: false
@@ -105,6 +111,7 @@ class MyHomePage extends StatelessWidget {
                               FlSpot(4, 10),
                               FlSpot(5, 12),
                               FlSpot(6, 13),
+                              FlSpot(7, 15),
                             ],
                             colors: [
                               Colors.green,
